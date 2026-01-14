@@ -52,6 +52,7 @@ class Flat(models.Model):
         null=True,
         blank=True,
         db_index=True)
+    liked_by = models.ManyToManyField(User, related_name='liked_posts', verbose_name='Кто лайнул')
     
 
     def __str__(self):
