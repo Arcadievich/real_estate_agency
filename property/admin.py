@@ -5,6 +5,11 @@ from .models import Complaint
 from .models import Owner
 
 
+class OwnershipInline(admin.TabularInline):
+    model = Owner.owners_flats.through
+    raw_id_fields = ['owner']
+
+
 class Admin(admin.ModelAdmin):
     search_fields = ('town', 'address')
     readonly_fields = ['created_at']
@@ -12,6 +17,7 @@ class Admin(admin.ModelAdmin):
     list_display = ['address', 'price', 'new_building', 'construction_year', 'town']
     list_filter = ['new_building', 'rooms_number', 'has_balcony']
     raw_id_fields = ['liked_by']
+    inlines = [OwnershipInline]
 
 
 class ComplaintAdmin(admin.ModelAdmin):
