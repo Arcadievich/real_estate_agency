@@ -6,7 +6,7 @@ from .models import Owner
 
 
 class Admin(admin.ModelAdmin):
-    search_fields = ('town', 'address', 'owner')
+    search_fields = ('town', 'address')
     readonly_fields = ['created_at']
     list_editable = ['new_building']
     list_display = ['address', 'price', 'new_building', 'construction_year', 'town']

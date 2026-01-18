@@ -6,9 +6,6 @@ from phonenumber_field.modelfields import PhoneNumberField
 
 
 class Flat(models.Model):
-    owner = models.CharField('ФИО владельца', max_length=200)
-    owners_phonenumber = models.CharField('Номер владельца', max_length=20)
-    owner_pure_phone = PhoneNumberField('Нормализованный номер владельца', null=True, blank=True)
     new_building = models.BooleanField(
         'Новостройка',
         null=True,
@@ -80,6 +77,7 @@ class Owner(models.Model):
     owner = models.CharField(
         'ФИО владельца',
         max_length=200,
+        db_index=True,
     )
     owners_phonenumber = models.CharField(
         'Номер владельца',
@@ -91,8 +89,8 @@ class Owner(models.Model):
         blank=True,
     )
     owners_flats = models.ManyToManyField(
-        User,
-        related_name='owners_flats',
+        'Flat',
+        related_name='flat_owners',
         blank=True,
         verbose_name='Квартиры в собственности',
     )
