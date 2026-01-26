@@ -6,7 +6,10 @@ import phonenumbers
 
 
 def normalize_phone_number(old_number):
-    parsed_number = phonenumbers.parse(old_number, 'RU')
+    try:
+        parsed_number = phonenumbers.parse(old_number, 'RU')
+    except phonenumbers.NumberParseException:
+        return None
 
     if phonenumbers.is_valid_number(parsed_number):
         normalize_number = phonenumbers.format_number(

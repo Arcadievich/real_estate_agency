@@ -7,9 +7,9 @@ def fill_construction_year_field(apps, schema_editor):
     Flat = apps.get_model('property', 'Flat')
     for flat in Flat.objects.all():
         if flat.construction_year >= 2015:
-            flat.new_building == True
+            flat.new_building = True
         else:
-            flat.new_building == False
+            flat.new_building = False
 
 
 class Migration(migrations.Migration):
