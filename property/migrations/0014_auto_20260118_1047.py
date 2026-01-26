@@ -6,9 +6,8 @@ from django.db import migrations
 def transfer_of_ownership(app, shema_editor):
     Flat = app.get_model('property', 'Flat')
     Owner = app.get_model('property', 'Owner')
-    flats = Flat.objects.all()
     
-    for flat in flats:
+    for flat in Flat.objects.all().iterator(chunk_size=1000):
         Owner.objects.get_or_create(
             owner=flat.owner,
             owners_phonenumber=flat.owners_phonenumber,
